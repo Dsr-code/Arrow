@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="none">
+  <defs>
+    <linearGradient id="arrowBrandGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#4f46e5" />
+      <stop offset="50%" stop-color="#6366f1" />
+      <stop offset="100%" stop-color="#9333ea" />
+    </linearGradient>
+    <filter id="arrowShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="12" stdDeviation="16" flood-color="#311068" flood-opacity="0.4" />
+    </filter>
+  </defs>
+
+  <!-- Modern squircle background container -->
+  <rect width="512" height="512" rx="128" fill="url(#arrowBrandGrad)" />
+
+  <!-- Subtle ambient inner highlight ring -->
+  <rect x="12" y="12" width="488" height="488" rx="116" stroke="#ffffff" stroke-opacity="0.18" stroke-width="6" />
+
+  <!-- Iconic Arrow matching app branding -->
+  <g filter="url(#arrowShadow)">
+    <g transform="translate(256, 256) rotate(-45) scale(15) translate(-12, -12)">
+      <line
+        x1="5"
+        y1="12"
+        x2="19"
+        y2="12"
+        stroke="#ffffff"
+        stroke-width="2.6"
+        stroke-linecap="round"
+      />
+      <polyline
+        points="12 5 19 12 12 19"
+        fill="none"
+        stroke="#ffffff"
+        stroke-width="2.6"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+    </g>
+  </g>
+</svg>

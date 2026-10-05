@@ -1,0 +1,19 @@
+{
+  "short_name": "Arrow",
+  "name": "Arrow — Goal Tracker",
+  "description": "A modern, focused goal and habit tracking web app",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "type": "image/svg+xml",
+      "sizes": "512x512",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#030007",
+  "theme_color": "#6366f1",
+  "display": "standalone",
+  "orientation": "any",
+  "categories": ["productivity", "utilities"]
+}
