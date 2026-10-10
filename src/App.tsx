@@ -147,19 +147,27 @@ function AppContent() {
   const globalStats = calculateGlobalStats(goals);
 
   return (
-    <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-[#030007] text-slate-800 dark:text-purple-100 transition-colors">
-      <Header
-        userName={userName}
-        onUpdateUserName={handleSaveUserName}
-        onNavigateHome={navigateHome}
-        globalStreak={globalStats.highestStreak}
-        totalGoalsCount={goals.length}
-        onExport={exportGoals}
-        onImport={importGoals}
-        onImportSharedRoadmap={handleImportSharedRoadmap}
-      />
+    <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-[#080d19] text-slate-900 dark:text-slate-100 transition-colors relative overflow-x-hidden selection:bg-blue-500/20 selection:text-blue-700 dark:selection:text-blue-300">
+      {/* Spatial Ambient Depth Layers */}
+      <div className="fixed inset-0 pointer-events-none overflow-hidden z-0" aria-hidden="true">
+        <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[800px] h-[450px] bg-gradient-to-b from-blue-500/12 via-sky-400/6 to-transparent dark:from-blue-600/20 dark:via-sky-500/10 dark:to-transparent rounded-full blur-3xl opacity-80" />
+        <div className="absolute top-1/3 -left-48 w-[500px] h-[500px] bg-blue-400/6 dark:bg-blue-500/10 rounded-full blur-3xl" />
+        <div className="absolute bottom-20 -right-48 w-[600px] h-[600px] bg-sky-400/6 dark:bg-sky-600/10 rounded-full blur-3xl" />
+      </div>
 
-      <main className="flex-1">
+      <div className="relative z-10 flex flex-col min-h-screen">
+        <Header
+          userName={userName}
+          onUpdateUserName={handleSaveUserName}
+          onNavigateHome={navigateHome}
+          globalStreak={globalStats.highestStreak}
+          totalGoalsCount={goals.length}
+          onExport={exportGoals}
+          onImport={importGoals}
+          onImportSharedRoadmap={handleImportSharedRoadmap}
+        />
+
+        <main className="flex-1">
         {sharedRoadmapPayload ? (
           <SharePreviewScreen
             payload={sharedRoadmapPayload}
@@ -234,6 +242,7 @@ function AppContent() {
         goal={sharingGoal}
         onClose={() => setSharingGoalId(null)}
       />
+      </div>
     </div>
   );
 }

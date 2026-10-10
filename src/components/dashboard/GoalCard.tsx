@@ -28,18 +28,21 @@ export function GoalCard({
       exit={{ opacity: 0, scale: 0.95 }}
       whileHover={{ y: -4, transition: { duration: 0.2 } }}
       onClick={() => onSelect(goal.id)}
-      className="group relative flex flex-col justify-between p-6 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-soft dark:shadow-soft-dark hover:shadow-card hover:border-brand-500/40 dark:hover:border-brand-500/40 cursor-pointer transition-all duration-200"
+      className="group relative flex flex-col justify-between p-6 rounded-3xl spatial-card cursor-pointer overflow-hidden"
     >
-      {/* Top section: Title, tag, delete button */}
+      {/* Specular edge highlight on hover */}
+      <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-blue-500/40 dark:via-sky-400/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+      {/* Top section: Title, tag, action buttons */}
       <div>
         <div className="flex items-start justify-between gap-3 mb-4">
           <div className="flex-1 min-w-0">
             {goal.category && (
-              <span className="inline-block text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 mb-1.5">
+              <span className="inline-block text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 mb-1.5 border border-slate-200/60 dark:border-slate-700/60">
                 {goal.category}
               </span>
             )}
-            <h3 className="text-lg font-bold text-slate-900 dark:text-white truncate group-hover:text-brand-600 dark:group-hover:text-brand-400 transition-colors">
+            <h3 className="text-lg font-bold text-slate-900 dark:text-white truncate group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
               {goal.name}
             </h3>
           </div>
@@ -52,7 +55,7 @@ export function GoalCard({
                   onShareRequest(goal);
                 }}
                 title="Share Roadmap"
-                className="opacity-80 sm:opacity-0 sm:group-hover:opacity-100 focus:opacity-100 p-2 text-slate-400 hover:text-purple-600 dark:hover:text-purple-400 rounded-xl hover:bg-purple-50 dark:hover:bg-purple-950/50 transition-all duration-150"
+                className="opacity-80 sm:opacity-0 sm:group-hover:opacity-100 focus:opacity-100 p-2 text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 rounded-xl hover:bg-blue-50 dark:hover:bg-blue-950/50 transition-all duration-150"
                 aria-label={`Share roadmap ${goal.name}`}
               >
                 <Share2 className="w-4 h-4" />
@@ -98,7 +101,7 @@ export function GoalCard({
               )}
 
               {stats.streak > 0 && (
-                <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-amber-50 dark:bg-amber-950/50 text-amber-700 dark:text-amber-300 text-[11px] font-black border border-amber-200/60 dark:border-amber-800/40">
+                <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-amber-50 dark:bg-amber-950/50 text-amber-700 dark:text-amber-300 text-[11px] font-black border border-amber-200/60 dark:border-amber-800/40">
                   🔥 {stats.streak}
                 </span>
               )}
@@ -117,9 +120,9 @@ export function GoalCard({
       <div className="mt-5 pt-4 border-t border-slate-100 dark:border-slate-800/80 flex items-center justify-between gap-2">
         {nextPendingDay ? (
           <div className="min-w-0 flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400">
-            <Calendar className="w-3.5 h-3.5 text-brand-500 shrink-0" />
+            <Calendar className="w-3.5 h-3.5 text-blue-500 shrink-0" />
             <span className="truncate">
-              <strong className="text-slate-700 dark:text-slate-300">
+              <strong className="text-slate-700 dark:text-slate-300 font-semibold">
                 Day {nextPendingDay.dayNumber}:
               </strong>{' '}
               {nextPendingDay.topic}
@@ -132,7 +135,7 @@ export function GoalCard({
           </div>
         )}
 
-        <div className="flex items-center gap-1 text-xs font-bold text-brand-600 dark:text-brand-400 shrink-0 group-hover:translate-x-1 transition-transform">
+        <div className="flex items-center gap-1 text-xs font-bold text-blue-600 dark:text-blue-400 shrink-0 group-hover:translate-x-1 transition-transform">
           <span>Roadmap</span>
           <ArrowRight className="w-3.5 h-3.5" />
         </div>

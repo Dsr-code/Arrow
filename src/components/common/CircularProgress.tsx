@@ -37,12 +37,12 @@ export function CircularProgress({
       >
         <defs>
           <linearGradient id="progressGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#6366f1" />
-            <stop offset="100%" stop-color="#8b5cf6" />
+            <stop offset="0%" stopColor="#2563eb" />
+            <stop offset="100%" stopColor="#38bdf8" />
           </linearGradient>
           <linearGradient id="completeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#10b981" />
-            <stop offset="100%" stop-color="#059669" />
+            <stop offset="0%" stopColor="#10b981" />
+            <stop offset="100%" stopColor="#059669" />
           </linearGradient>
         </defs>
 
@@ -53,7 +53,7 @@ export function CircularProgress({
           r={radius}
           stroke="currentColor"
           strokeWidth={strokeWidth}
-          className="text-slate-100 dark:text-slate-800"
+          className="text-slate-200/70 dark:text-slate-800/80"
           fill="transparent"
         />
 

@@ -93,7 +93,7 @@ export function DayCard({
             className={`relative w-8 h-8 sm:w-9 sm:h-9 rounded-2xl flex items-center justify-center transition-all duration-200 z-10 ${
               day.completed
                 ? 'bg-emerald-500 text-white shadow-md shadow-emerald-500/30 scale-105'
-                : 'bg-white dark:bg-[#140726] border-2 border-slate-300 dark:border-purple-800/60 text-transparent hover:border-purple-500 dark:hover:border-purple-400'
+                : 'bg-white dark:bg-slate-900 border-2 border-slate-300 dark:border-slate-700 text-transparent hover:border-blue-500 dark:hover:border-sky-400 shadow-sm'
             }`}
             aria-label={`Toggle completion for Day ${day.dayNumber}`}
           >
@@ -118,7 +118,7 @@ export function DayCard({
               className={`w-0.5 flex-1 mt-2 transition-colors duration-200 ${
                 day.completed
                   ? 'bg-emerald-300/60 dark:bg-emerald-800/60'
-                  : 'bg-slate-200 dark:bg-purple-950/80'
+                  : 'bg-slate-200 dark:bg-slate-800'
               }`}
             />
           )}
@@ -126,10 +126,10 @@ export function DayCard({
 
         {/* Day Content Card */}
         <div
-          className={`flex-1 mb-6 p-4 sm:p-5 rounded-3xl border transition-all duration-200 ${
+          className={`flex-1 mb-6 p-4 sm:p-5 rounded-3xl border transition-all duration-200 spatial-card ${
             day.completed
-              ? 'bg-emerald-50/50 dark:bg-emerald-950/20 border-emerald-200/70 dark:border-emerald-800/40 shadow-sm'
-              : 'bg-white dark:bg-[#0a0314] border-slate-200/80 dark:border-purple-900/40 shadow-soft dark:shadow-soft-dark'
+              ? 'bg-emerald-50/40 dark:bg-emerald-950/20 border-emerald-200/70 dark:border-emerald-800/40 shadow-sm'
+              : 'bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border-slate-200/80 dark:border-slate-800/80 shadow-spatial dark:shadow-spatial-dark'
           }`}
         >
           {/* Card Top Header: Day Badge, Editable Topic, Completion status */}
@@ -139,7 +139,7 @@ export function DayCard({
                 className={`text-xs font-bold px-2.5 py-1 rounded-xl shrink-0 transition-colors ${
                   day.completed
                     ? 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900/60 dark:text-emerald-300'
-                    : 'bg-brand-50 text-brand-700 dark:bg-purple-950/80 dark:text-purple-300 border border-transparent dark:border-purple-800/40'
+                    : 'bg-blue-50 text-blue-700 dark:bg-blue-950/80 dark:text-sky-300 border border-blue-200/60 dark:border-blue-800/40'
                 }`}
               >
                 Day {day.dayNumber}
@@ -156,7 +156,7 @@ export function DayCard({
                       onChange={(e) => setTopicInput(e.target.value)}
                       onBlur={commitTopicChange}
                       onKeyDown={handleKeyDown}
-                      className="w-full px-2.5 py-1 text-sm sm:text-base font-bold rounded-lg bg-slate-50 dark:bg-[#140726] border border-brand-500 dark:border-purple-500 focus:outline-none focus:ring-1 focus:ring-purple-500 text-slate-900 dark:text-white"
+                      className="w-full px-2.5 py-1 text-sm sm:text-base font-bold rounded-lg bg-slate-50 dark:bg-slate-800 border border-blue-500 dark:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-500 text-slate-900 dark:text-white"
                       placeholder="Topic name..."
                     />
                     <button
@@ -177,7 +177,7 @@ export function DayCard({
                         setIsEditingTopic(false);
                         setTopicInput(day.topic);
                       }}
-                      className="p-1.5 rounded-lg text-slate-400 hover:text-slate-600 dark:hover:text-purple-300 hover:bg-slate-100 dark:hover:bg-purple-950/50 transition-colors"
+                      className="p-1.5 rounded-lg text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
                       title="Cancel"
                     >
                       <X className="w-4 h-4" />
@@ -193,12 +193,12 @@ export function DayCard({
                       className={`text-sm sm:text-base font-bold transition-colors leading-snug ${
                         day.completed
                           ? 'line-through text-slate-500 dark:text-slate-400'
-                          : 'text-slate-900 dark:text-purple-100 hover:text-purple-600 dark:hover:text-purple-300'
+                          : 'text-slate-900 dark:text-slate-100 hover:text-blue-600 dark:hover:text-sky-400'
                       }`}
                     >
                       {day.topic}
                     </h4>
-                    <Edit2 className="w-3.5 h-3.5 text-slate-400 dark:text-purple-400/70 opacity-60 group-hover/topic:opacity-100 transition-opacity shrink-0" />
+                    <Edit2 className="w-3.5 h-3.5 text-slate-400 dark:text-slate-500 opacity-60 group-hover/topic:opacity-100 transition-opacity shrink-0" />
                   </div>
                 )}
               </div>
@@ -241,7 +241,7 @@ export function DayCard({
             {/* Add Resource Button */}
             <button
               onClick={() => setIsAddResourceOpen(true)}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold text-purple-700 dark:text-purple-300 bg-purple-50/80 dark:bg-purple-950/40 hover:bg-purple-100 dark:hover:bg-purple-900/50 border border-dashed border-purple-300 dark:border-purple-800 transition-colors"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold text-blue-700 dark:text-sky-300 bg-blue-50/80 dark:bg-blue-950/40 hover:bg-blue-100 dark:hover:bg-blue-900/50 border border-dashed border-blue-300 dark:border-blue-700/60 transition-colors"
             >
               <Plus className="w-3.5 h-3.5" />
               <span>Add Resource</span>
@@ -251,31 +251,31 @@ export function DayCard({
             {day.resources && day.resources.length > 0 && (
               <button
                 onClick={() => setIsManageResourcesOpen(true)}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold text-slate-600 dark:text-purple-300 bg-slate-100 dark:bg-[#140726] hover:bg-slate-200 dark:hover:bg-[#1f0a3b] border border-slate-200 dark:border-purple-800/60 transition-colors"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold text-slate-600 dark:text-slate-300 bg-slate-100/90 dark:bg-slate-800/90 hover:bg-slate-200 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700/60 transition-colors"
                 title="Manage, edit or remove resources safely"
               >
-                <SlidersHorizontal className="w-3.5 h-3.5 text-slate-500 dark:text-purple-400" />
+                <SlidersHorizontal className="w-3.5 h-3.5 text-slate-500 dark:text-slate-400" />
                 <span>Edit Resources</span>
               </button>
             )}
           </div>
 
           {/* Bottom Card Actions: Log Indicator / Create Log Button */}
-          <div className="mt-4 pt-3 border-t border-slate-100 dark:border-purple-950/60 flex items-center justify-between gap-3">
+          <div className="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800/80 flex items-center justify-between gap-3">
             {hasLog ? (
               <div className="flex items-center gap-2">
                 <button
                   onClick={() => setIsLogOpen((prev) => !prev)}
-                  className="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl text-xs font-semibold bg-purple-50 text-purple-700 dark:bg-purple-950/60 dark:text-purple-300 border border-purple-200/60 dark:border-purple-800/40 hover:bg-purple-100 dark:hover:bg-purple-900/50 transition-colors"
+                  className="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl text-xs font-semibold bg-blue-50 text-blue-700 dark:bg-blue-950/60 dark:text-sky-300 border border-blue-200/60 dark:border-blue-800/40 hover:bg-blue-100 dark:hover:bg-blue-900/50 transition-colors"
                 >
-                  <FileText className="w-3.5 h-3.5 text-purple-500" />
+                  <FileText className="w-3.5 h-3.5 text-blue-500 dark:text-sky-400" />
                   <span>Log Notes</span>
-                  <span className="text-[10px] px-1 rounded-md bg-purple-200/60 dark:bg-purple-900 text-purple-800 dark:text-purple-200">
+                  <span className="text-[10px] px-1 rounded-md bg-blue-200/60 dark:bg-blue-900 text-blue-800 dark:text-sky-200">
                     {isLogOpen ? 'Hide' : 'View'}
                   </span>
                 </button>
                 {day.log?.updatedAt && (
-                  <span className="text-[11px] text-slate-400 dark:text-purple-300/50 hidden sm:inline">
+                  <span className="text-[11px] text-slate-400 dark:text-slate-500 hidden sm:inline">
                     Updated {new Date(day.log.updatedAt).toLocaleDateString()}
                   </span>
                 )}
@@ -283,7 +283,7 @@ export function DayCard({
             ) : (
               <button
                 onClick={() => setIsLogOpen(true)}
-                className="inline-flex items-center gap-1 text-xs font-medium text-slate-500 dark:text-purple-300/70 hover:text-purple-600 dark:hover:text-purple-300 transition-colors"
+                className="inline-flex items-center gap-1 text-xs font-medium text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-sky-400 transition-colors"
               >
                 <BookOpen className="w-3.5 h-3.5" />
                 <span>+ Create Log</span>
@@ -296,7 +296,7 @@ export function DayCard({
               className={`text-xs font-semibold px-3 py-1 rounded-xl transition-all sm:hidden ${
                 day.completed
                   ? 'text-emerald-700 dark:text-emerald-300 bg-emerald-100 dark:bg-emerald-950/50'
-                  : 'text-slate-600 dark:text-purple-300 bg-slate-100 dark:bg-[#140726]'
+                  : 'text-slate-600 dark:text-slate-300 bg-slate-100 dark:bg-slate-800'
               }`}
             >
               {day.completed ? 'Completed' : 'Mark Done'}

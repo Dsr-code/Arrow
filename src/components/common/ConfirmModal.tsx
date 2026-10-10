@@ -32,7 +32,7 @@ export function ConfirmModal({
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
-            className="fixed inset-0 bg-slate-950/50 backdrop-blur-sm"
+            className="fixed inset-0 bg-slate-950/60 dark:bg-black/80 backdrop-blur-md"
           />
 
           {/* Modal Card */}
@@ -41,7 +41,7 @@ export function ConfirmModal({
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 15 }}
             transition={{ type: 'spring', damping: 25, stiffness: 350 }}
-            className="relative w-full max-w-md bg-white dark:bg-slate-900 rounded-3xl p-6 shadow-2xl border border-slate-200/80 dark:border-slate-800 z-10"
+            className="relative w-full max-w-md spatial-glass bg-white/90 dark:bg-slate-900/90 backdrop-blur-2xl rounded-3xl p-6 shadow-spatial-elevated dark:shadow-spatial-elevated-dark border border-slate-200/80 dark:border-slate-800 z-10"
             role="dialog"
             aria-modal="true"
           >
@@ -58,7 +58,7 @@ export function ConfirmModal({
                 className={`p-3 rounded-2xl shrink-0 ${
                   isDestructive
                     ? 'bg-rose-50 text-rose-600 dark:bg-rose-950/50 dark:text-rose-400'
-                    : 'bg-indigo-50 text-indigo-600 dark:bg-indigo-950/50 dark:text-indigo-400'
+                    : 'bg-blue-50 text-blue-600 dark:bg-blue-950/50 dark:text-sky-400'
                 }`}
               >
                 <AlertCircle className="w-6 h-6" />
@@ -91,7 +91,7 @@ export function ConfirmModal({
                 className={`px-5 py-2.5 rounded-xl font-semibold text-sm text-white shadow-sm transition-all duration-150 active:scale-95 ${
                   isDestructive
                     ? 'bg-rose-600 hover:bg-rose-700 shadow-rose-500/25'
-                    : 'bg-indigo-600 hover:bg-indigo-700 shadow-indigo-500/25'
+                    : 'bg-blue-600 hover:bg-blue-700 shadow-blue-500/25'
                 }`}
               >
                 {confirmLabel}

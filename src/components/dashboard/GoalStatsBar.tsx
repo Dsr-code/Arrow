@@ -11,29 +11,29 @@ export function GoalStatsBar({ stats }: GoalStatsBarProps) {
       label: 'Active Roadmaps',
       value: stats.activeGoalsCount,
       subValue: `${stats.totalGoals} total`,
-      icon: <Target className="w-5 h-5 text-brand-600 dark:text-brand-400" />,
-      bg: 'bg-brand-50/60 dark:bg-brand-950/40 border-brand-100 dark:border-brand-900/50',
+      icon: <Target className="w-5 h-5 text-blue-600 dark:text-blue-400" />,
+      iconBg: 'bg-blue-500/10 dark:bg-blue-400/15 border-blue-500/20 text-blue-600 dark:text-blue-400',
     },
     {
       label: 'Completed Days',
       value: stats.totalCompletedDays,
       subValue: `${stats.totalDays} total days`,
       icon: <CheckCircle2 className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />,
-      bg: 'bg-emerald-50/60 dark:bg-emerald-950/40 border-emerald-100 dark:border-emerald-900/50',
+      iconBg: 'bg-emerald-500/10 dark:bg-emerald-400/15 border-emerald-500/20 text-emerald-600 dark:text-emerald-400',
     },
     {
       label: 'Overall Progress',
       value: `${stats.overallPercentage}%`,
       subValue: `${stats.completedGoalsCount} completed goal${stats.completedGoalsCount === 1 ? '' : 's'}`,
-      icon: <TrendingUp className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />,
-      bg: 'bg-indigo-50/60 dark:bg-indigo-950/40 border-indigo-100 dark:border-indigo-900/50',
+      icon: <TrendingUp className="w-5 h-5 text-sky-600 dark:text-sky-400" />,
+      iconBg: 'bg-sky-500/10 dark:bg-sky-400/15 border-sky-500/20 text-sky-600 dark:text-sky-400',
     },
     {
       label: 'Streak',
       value: `🔥 ${stats.highestStreak}`,
       subValue: 'Consecutive days',
       icon: <Flame className="w-5 h-5 text-amber-500 fill-amber-500" />,
-      bg: 'bg-amber-50/60 dark:bg-amber-950/40 border-amber-100 dark:border-amber-900/50',
+      iconBg: 'bg-amber-500/10 dark:bg-amber-400/15 border-amber-500/20 text-amber-600 dark:text-amber-400',
     },
   ];
 
@@ -42,20 +42,23 @@ export function GoalStatsBar({ stats }: GoalStatsBarProps) {
       {cards.map((c) => (
         <div
           key={c.label}
-          className={`p-4 sm:p-5 rounded-3xl border transition-all duration-200 bg-white/70 dark:bg-slate-900/70 shadow-soft dark:shadow-soft-dark backdrop-blur-sm ${c.bg}`}
+          className="spatial-card p-4 sm:p-5 rounded-3xl relative overflow-hidden group"
         >
+          {/* Subtle top specular shimmer line */}
+          <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-blue-500/30 dark:via-sky-400/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+          
           <div className="flex items-center justify-between mb-2">
             <span className="text-xs font-semibold text-slate-500 dark:text-slate-400">
               {c.label}
             </span>
-            <div className="p-2 rounded-xl bg-white dark:bg-slate-800 shadow-sm">
+            <div className={`p-2 rounded-2xl border shadow-sm ${c.iconBg}`}>
               {c.icon}
             </div>
           </div>
-          <div className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+          <div className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white tracking-tight">
             {c.value}
           </div>
-          <div className="text-[11px] text-slate-400 dark:text-slate-500 mt-0.5 font-medium">
+          <div className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5 font-medium">
             {c.subValue}
           </div>
         </div>

@@ -63,14 +63,14 @@ export function DashboardPage({
       {/* Welcome Headline with User Name */}
       <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
         <div>
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-brand-50 dark:bg-[#140726] text-brand-700 dark:text-purple-300 text-xs font-semibold mb-2.5 border border-brand-200/60 dark:border-purple-800/60">
-            <Sparkles className="w-3.5 h-3.5 text-brand-500 dark:text-purple-400" />
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 text-xs font-semibold mb-2.5 border border-blue-200/60 dark:border-blue-800/60 shadow-sm">
+            <Sparkles className="w-3.5 h-3.5 text-blue-500 dark:text-blue-400" />
             <span>Progress Driven Focus</span>
           </div>
           <h1 className="text-2xl sm:text-4xl font-black text-slate-900 dark:text-white tracking-tight">
             {userName ? `Welcome back, ${userName} 👋` : 'Your Goal Roadmaps'}
           </h1>
-          <p className="text-xs sm:text-sm text-slate-500 dark:text-purple-300/70 mt-1 max-w-lg leading-relaxed">
+          <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1 max-w-lg leading-relaxed font-medium">
             Break any big milestone into daily steps with curated resources and reflections.
           </p>
         </div>
@@ -90,7 +90,7 @@ export function DashboardPage({
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search goals..."
-              className="w-full pl-9 pr-4 py-2.5 rounded-2xl bg-white dark:bg-[#0a0314] border border-slate-200/80 dark:border-purple-900/40 text-xs sm:text-sm text-slate-800 dark:text-purple-100 placeholder-slate-400 dark:placeholder-purple-400/40 focus:outline-none focus:ring-2 focus:ring-purple-500/40 transition-all shadow-soft"
+              className="w-full pl-9 pr-4 py-2.5 rounded-2xl bg-white/85 dark:bg-slate-900/80 border border-slate-200/90 dark:border-slate-800 text-xs sm:text-sm text-slate-900 dark:text-slate-100 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/40 focus:border-blue-400 transition-all shadow-sm"
             />
           </div>
 
@@ -112,10 +112,10 @@ export function DashboardPage({
               <button
                 key={tab.key}
                 onClick={() => setFilter(tab.key)}
-                className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all ${
+                className={`px-4 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all ${
                   filter === tab.key
-                    ? 'bg-purple-600 text-white shadow-sm'
-                    : 'bg-white dark:bg-[#0a0314] text-slate-600 dark:text-purple-300 border border-slate-200/70 dark:border-purple-900/40 hover:bg-slate-50 dark:hover:bg-[#140726]'
+                    ? 'bg-blue-600 text-white shadow-md shadow-blue-500/25'
+                    : 'bg-white/80 dark:bg-slate-800/70 text-slate-600 dark:text-slate-300 border border-slate-200/80 dark:border-slate-700/60 hover:bg-white dark:hover:bg-slate-800 hover:border-blue-300 dark:hover:border-blue-500/50'
                 }`}
               >
                 {tab.label}
@@ -129,8 +129,8 @@ export function DashboardPage({
       {goals.length === 0 ? (
         <EmptyState onCreateGoal={onOpenCreateModal} />
       ) : filteredGoals.length === 0 ? (
-        <div className="text-center py-12 px-4 rounded-3xl bg-white dark:bg-[#0a0314] border border-slate-200/80 dark:border-purple-900/40">
-          <p className="text-sm font-semibold text-slate-600 dark:text-purple-300">
+        <div className="text-center py-12 px-4 rounded-3xl spatial-glass">
+          <p className="text-sm font-semibold text-slate-600 dark:text-slate-300">
             No goals match your search or filter.
           </p>
           <button
@@ -138,7 +138,7 @@ export function DashboardPage({
               setSearchQuery('');
               setFilter('all');
             }}
-            className="mt-3 text-xs font-bold text-purple-600 dark:text-purple-400 hover:underline"
+            className="mt-3 text-xs font-bold text-blue-600 dark:text-blue-400 hover:underline"
           >
             Clear filters
           </button>
@@ -157,19 +157,19 @@ export function DashboardPage({
             ))}
           </AnimatePresence>
 
-          {/* Quick "+ Add Another Goal" Card placeholder */}
+          {/* Quick "+ Set New Goal" Card placeholder */}
           <motion.div
             whileHover={{ y: -4, transition: { duration: 0.2 } }}
             onClick={onOpenCreateModal}
-            className="p-6 rounded-3xl border-2 border-dashed border-slate-200 dark:border-purple-900/40 hover:border-purple-500/50 dark:hover:border-purple-500/50 bg-slate-50/50 dark:bg-[#0a0314]/40 flex flex-col items-center justify-center text-center cursor-pointer min-h-[200px] sm:min-h-[220px] group transition-all"
+            className="spatial-glass p-6 rounded-3xl border-2 border-dashed border-slate-300/80 dark:border-slate-700/80 hover:border-blue-500 dark:hover:border-blue-400 hover:bg-blue-50/20 dark:hover:bg-blue-950/20 flex flex-col items-center justify-center text-center cursor-pointer min-h-[200px] sm:min-h-[220px] group transition-all duration-300"
           >
-            <div className="w-12 h-12 rounded-2xl bg-brand-50 dark:bg-[#140726] text-purple-600 dark:text-purple-400 flex items-center justify-center mb-3 group-hover:scale-110 group-hover:bg-purple-600 group-hover:text-white transition-all shadow-sm">
+            <div className="w-12 h-12 rounded-2xl bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 border border-blue-200/50 dark:border-blue-800/50 flex items-center justify-center mb-3 group-hover:scale-110 group-hover:bg-blue-600 group-hover:text-white group-hover:shadow-lg group-hover:shadow-blue-500/30 transition-all shadow-sm">
               <Plus className="w-6 h-6 stroke-[2.5]" />
             </div>
-            <h4 className="text-base font-bold text-slate-800 dark:text-purple-100 group-hover:text-purple-600 dark:group-hover:text-purple-300 transition-colors">
+            <h4 className="text-base font-bold text-slate-800 dark:text-slate-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
               Set New Goal
             </h4>
-            <p className="text-xs text-slate-400 dark:text-purple-400/60 mt-1 max-w-[200px]">
+            <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 max-w-[200px]">
               Generate a custom 7, 30, or 60-day roadmap
             </p>
           </motion.div>

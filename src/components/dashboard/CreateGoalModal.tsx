@@ -137,7 +137,7 @@ export function CreateGoalModal({
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
-            className="fixed inset-0 bg-slate-950/60 dark:bg-black/70 backdrop-blur-sm"
+            className="fixed inset-0 bg-slate-950/60 dark:bg-black/75 backdrop-blur-md"
           />
 
           {/* Modal Container */}
@@ -146,11 +146,11 @@ export function CreateGoalModal({
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 15 }}
             transition={{ type: 'spring', damping: 25, stiffness: 350 }}
-            className="relative w-full max-w-lg bg-white dark:bg-[#0a0314] rounded-3xl p-6 sm:p-8 shadow-2xl border border-slate-200/80 dark:border-purple-900/40 z-10 max-h-[90vh] overflow-y-auto"
+            className="relative w-full max-w-lg bg-white/95 dark:bg-slate-900/95 backdrop-blur-2xl rounded-3xl p-6 sm:p-8 shadow-2xl border border-slate-200/90 dark:border-slate-700/70 z-10 max-h-[90vh] overflow-y-auto"
           >
             <button
               onClick={onClose}
-              className="absolute top-6 right-6 p-1.5 text-slate-400 hover:text-slate-600 dark:hover:text-purple-300 rounded-full hover:bg-slate-100 dark:hover:bg-purple-950/50 transition-colors"
+              className="absolute top-6 right-6 p-1.5 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
               aria-label="Close modal"
             >
               <X className="w-5 h-5" />
@@ -158,14 +158,14 @@ export function CreateGoalModal({
 
             {/* Modal Header */}
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-purple-600 via-indigo-600 to-violet-500 text-white flex items-center justify-center shadow-lg shadow-purple-500/25">
+              <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-blue-600 via-blue-500 to-sky-400 text-white flex items-center justify-center shadow-lg shadow-blue-500/25 border border-white/20">
                 <Target className="w-6 h-6" />
               </div>
               <div>
                 <h2 className="text-xl font-bold text-slate-900 dark:text-white">
                   Create New Goal
                 </h2>
-                <p className="text-xs text-slate-500 dark:text-purple-300/70">
+                <p className="text-xs text-slate-500 dark:text-slate-400">
                   Set target schedule & auto-generate day-by-day roadmap
                 </p>
               </div>
@@ -174,7 +174,7 @@ export function CreateGoalModal({
             <form onSubmit={handleSubmit} className="space-y-4">
               {/* Goal Name Field */}
               <div>
-                <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-purple-200 mb-1.5">
+                <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-200 mb-1.5">
                   Goal Name
                 </label>
                 <div className="relative">
@@ -188,13 +188,13 @@ export function CreateGoalModal({
                       if (error) setError(null);
                     }}
                     placeholder="e.g. Master Python, 30 Days of LeetCode"
-                    className="w-full px-4 py-2.5 rounded-2xl bg-slate-50 dark:bg-[#140726] border border-slate-200 dark:border-purple-800/40 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-purple-400/40 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500 transition-all"
+                    className="w-full px-4 py-2.5 rounded-2xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white placeholder-slate-400 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 transition-all"
                   />
                 </div>
 
                 {/* Inspiration chips */}
                 <div className="mt-2 flex flex-wrap gap-1.5 items-center">
-                  <span className="text-[11px] text-slate-400 dark:text-purple-400/60 flex items-center gap-1 mr-1">
+                  <span className="text-[11px] text-slate-400 dark:text-slate-400 flex items-center gap-1 mr-1">
                     <Sparkles className="w-3 h-3 text-amber-500" /> Ideas:
                   </span>
                   {SUGGESTIONS.slice(0, 3).map((s) => (
@@ -202,7 +202,7 @@ export function CreateGoalModal({
                       type="button"
                       key={s}
                       onClick={() => selectSuggestion(s)}
-                      className="text-[11px] px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-purple-950/40 text-slate-600 dark:text-purple-300 hover:bg-brand-50 hover:text-purple-600 dark:hover:bg-purple-900/40 transition-colors border border-transparent dark:border-purple-900/30"
+                      className="text-[11px] px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-blue-50 hover:text-blue-600 dark:hover:bg-blue-950/40 dark:hover:text-blue-300 transition-colors border border-transparent dark:border-slate-700/40"
                     >
                       {s}
                     </button>
@@ -213,7 +213,7 @@ export function CreateGoalModal({
               {/* Start & End Date Fields */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
                 <div>
-                  <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-purple-200 mb-1.5">
+                  <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-200 mb-1.5">
                     Start Date
                   </label>
                   <div className="relative">
@@ -222,13 +222,13 @@ export function CreateGoalModal({
                       required
                       value={startDate}
                       onChange={(e) => handleStartDateChange(e.target.value)}
-                      className="w-full px-3.5 py-2.5 rounded-2xl bg-slate-50 dark:bg-[#140726] border border-slate-200 dark:border-purple-800/40 text-slate-900 dark:text-white text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500 transition-all"
+                      className="w-full px-3.5 py-2.5 rounded-2xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 transition-all"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-purple-200 mb-1.5">
+                  <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-200 mb-1.5">
                     End Date
                   </label>
                   <div className="relative">
@@ -238,7 +238,7 @@ export function CreateGoalModal({
                       min={startDate}
                       value={endDate}
                       onChange={(e) => handleEndDateChange(e.target.value)}
-                      className="w-full px-3.5 py-2.5 rounded-2xl bg-slate-50 dark:bg-[#140726] border border-slate-200 dark:border-purple-800/40 text-slate-900 dark:text-white text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500 transition-all"
+                      className="w-full px-3.5 py-2.5 rounded-2xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 transition-all"
                     />
                   </div>
                 </div>
@@ -247,16 +247,16 @@ export function CreateGoalModal({
               {/* Days to Achieve Field */}
               <div>
                 <div className="flex items-center justify-between mb-1.5">
-                  <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-purple-200">
+                  <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-200">
                     Days to Achieve
                   </label>
-                  <span className="text-xs text-purple-600 dark:text-purple-400 font-bold">
+                  <span className="text-xs text-blue-600 dark:text-blue-400 font-bold">
                     Day 1 through Day {totalDays || 0}
                   </span>
                 </div>
 
                 <div className="relative">
-                  <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400 dark:text-purple-400/60">
+                  <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
                     <Calendar className="w-4 h-4" />
                   </div>
                   <input
@@ -267,13 +267,13 @@ export function CreateGoalModal({
                     value={totalDays}
                     onChange={(e) => handleDaysInputChange(e.target.value)}
                     placeholder="e.g. 14"
-                    className="w-full pl-10 pr-4 py-2.5 rounded-2xl bg-slate-50 dark:bg-[#140726] border border-slate-200 dark:border-purple-800/40 text-slate-900 dark:text-white placeholder-slate-400 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500 transition-all"
+                    className="w-full pl-10 pr-4 py-2.5 rounded-2xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white placeholder-slate-400 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 transition-all"
                   />
                 </div>
 
                 {/* Preset day buttons */}
                 <div className="mt-2 flex items-center gap-1.5 flex-wrap">
-                  <span className="text-[11px] text-slate-400 dark:text-purple-400/60 mr-1">
+                  <span className="text-[11px] text-slate-400 dark:text-slate-400 mr-1">
                     Presets:
                   </span>
                   {PRESET_DAYS.map((days) => (
@@ -283,8 +283,8 @@ export function CreateGoalModal({
                       onClick={() => handleDaysPreset(days)}
                       className={`text-xs px-2.5 py-1 rounded-lg font-medium transition-colors ${
                         Number(totalDays) === days
-                          ? 'bg-purple-600 text-white shadow-sm'
-                          : 'bg-slate-100 dark:bg-purple-950/40 text-slate-600 dark:text-purple-300 hover:bg-slate-200 dark:hover:bg-purple-900/40 border border-transparent dark:border-purple-900/30'
+                          ? 'bg-blue-600 text-white shadow-sm'
+                          : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 border border-transparent dark:border-slate-700/30'
                       }`}
                     >
                       {days}d
@@ -305,13 +305,13 @@ export function CreateGoalModal({
                 <button
                   type="button"
                   onClick={onClose}
-                  className="px-4 py-2.5 rounded-xl text-sm font-medium text-slate-600 dark:text-purple-300 hover:bg-slate-100 dark:hover:bg-purple-950/40 transition-colors"
+                  className="px-4 py-2.5 rounded-xl text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="inline-flex items-center gap-2 px-6 py-2.5 rounded-2xl bg-gradient-to-r from-purple-600 via-indigo-600 to-violet-600 hover:from-purple-500 hover:to-violet-500 text-white font-semibold text-sm shadow-md shadow-purple-500/25 hover:shadow-lg active:scale-95 transition-all"
+                  className="inline-flex items-center gap-2 px-6 py-2.5 rounded-2xl bg-gradient-to-r from-blue-600 via-blue-500 to-sky-500 hover:from-blue-500 hover:to-sky-400 text-white font-semibold text-sm shadow-md shadow-blue-500/25 hover:shadow-lg active:scale-95 transition-all"
                 >
                   <span>Build Roadmap</span>
                   <ArrowRight className="w-4 h-4" />

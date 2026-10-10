@@ -70,7 +70,7 @@ export function AddResourceModal({
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={handleClose}
-            className="fixed inset-0 bg-slate-950/50 backdrop-blur-sm"
+            className="fixed inset-0 bg-slate-950/60 dark:bg-black/80 backdrop-blur-md"
           />
 
           <motion.div
@@ -78,7 +78,7 @@ export function AddResourceModal({
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 15 }}
             transition={{ type: 'spring', damping: 25, stiffness: 350 }}
-            className="relative w-full max-w-md bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-7 shadow-2xl border border-slate-200/80 dark:border-slate-800 z-10"
+            className="relative w-full max-w-md spatial-glass bg-white/90 dark:bg-slate-900/90 backdrop-blur-2xl rounded-3xl p-6 sm:p-7 shadow-spatial-elevated dark:shadow-spatial-elevated-dark border border-slate-200/80 dark:border-slate-800 z-10"
           >
             <button
               onClick={handleClose}
@@ -88,7 +88,7 @@ export function AddResourceModal({
             </button>
 
             <div className="flex items-center gap-3 mb-5">
-              <div className="w-10 h-10 rounded-2xl bg-indigo-50 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-400 flex items-center justify-center">
+              <div className="w-10 h-10 rounded-2xl bg-blue-50 dark:bg-blue-950/50 text-blue-600 dark:text-sky-400 flex items-center justify-center">
                 <Link2 className="w-5 h-5" />
               </div>
               <div>
@@ -116,7 +116,7 @@ export function AddResourceModal({
                     if (error) setError(null);
                   }}
                   placeholder="e.g. https://youtube.com/... or leetcode.com/..."
-                  className="w-full px-4 py-2.5 rounded-2xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white placeholder-slate-400 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500/50 focus:border-brand-500 transition-all"
+                  className="w-full px-4 py-2.5 rounded-2xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white placeholder-slate-400 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 transition-all"
                 />
               </div>
 
@@ -131,10 +131,10 @@ export function AddResourceModal({
                       <Play className="w-3.5 h-3.5 text-rose-500 fill-rose-500" />
                     )}
                     {previewDetection.type === 'practice' && (
-                      <Code className="w-3.5 h-3.5 text-indigo-500" />
+                      <Code className="w-3.5 h-3.5 text-sky-500 dark:text-sky-400" />
                     )}
                     {previewDetection.type === 'generic' && (
-                      <ExternalLink className="w-3.5 h-3.5 text-slate-500" />
+                      <ExternalLink className="w-3.5 h-3.5 text-slate-500 dark:text-slate-400" />
                     )}
                     <span className="text-slate-800 dark:text-slate-200">
                       {previewDetection.label}
@@ -152,7 +152,7 @@ export function AddResourceModal({
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
                   placeholder="e.g. Tutorial walkthrough, Two Sum problem"
-                  className="w-full px-4 py-2.5 rounded-2xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white placeholder-slate-400 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500/50 focus:border-brand-500 transition-all"
+                  className="w-full px-4 py-2.5 rounded-2xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white placeholder-slate-400 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 transition-all"
                 />
               </div>
 
@@ -173,7 +173,7 @@ export function AddResourceModal({
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="inline-flex items-center gap-1.5 px-5 py-2 rounded-2xl bg-brand-600 hover:bg-brand-700 disabled:opacity-50 text-white font-semibold text-sm shadow-md shadow-brand-500/20 active:scale-95 transition-all"
+                  className="inline-flex items-center gap-1.5 px-5 py-2 rounded-2xl bg-blue-600 hover:bg-blue-700 disabled:opacity-50 text-white font-semibold text-sm shadow-md shadow-blue-500/20 active:scale-95 transition-all"
                 >
                   <Plus className="w-4 h-4" />
                   <span>{isSubmitting ? 'Adding...' : 'Add Resource'}</span>

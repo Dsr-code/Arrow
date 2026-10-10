@@ -32,7 +32,7 @@ export function useTheme() {
     // Update meta theme-color for browser tab / mobile / PWA header
     const themeColorMeta = document.querySelector('meta[name="theme-color"]');
     if (themeColorMeta) {
-      themeColorMeta.setAttribute('content', isDark ? '#030007' : '#6366f1');
+      themeColorMeta.setAttribute('content', isDark ? '#080d19' : '#2563eb');
     }
   }, []);
 

@@ -5,7 +5,7 @@ import { GoalHeader } from '../components/goal-detail/GoalHeader';
 import { DayCard } from '../components/goal-detail/DayCard';
 import { ConfirmModal } from '../components/common/ConfirmModal';
 import { useToast } from '../context/ToastContext';
-import { Search, Plus, Trash2 } from 'lucide-react';
+import { Search, Plus } from 'lucide-react';
 
 interface GoalDetailPageProps {
   goal: Goal;
@@ -51,23 +51,7 @@ export function GoalDetailPage({
       toast.info('Cannot Remove Day', 'A goal roadmap must have at least 1 milestone day.');
       return;
     }
-    const target = goal.days?.find((d) => d.dayNumber === dayNum);
-    const isDefaultTopic =
-      !target?.topic ||
-      target.topic === `Day ${dayNum}: Milestone & Objective` ||
-      target.topic === `Day ${dayNum}`;
-    const hasResources = Boolean(target?.resources && target.resources.length > 0);
-    const hasLog = Boolean(target?.log && target.log.text.trim().length > 0);
-
-    // If completely empty, uncompleted, without notes/links, delete immediately
-    if (isDefaultTopic && !hasResources && !hasLog && !target?.completed) {
-      if (onDeleteDay) {
-        onDeleteDay(dayNum);
-        toast.info('Day Removed', `Day ${dayNum} was removed.`);
-      }
-    } else {
-      setDayToDelete(dayNum);
-    }
+    setDayToDelete(dayNum);
   };
 
   const filteredDays = (goal.days || []).filter((day) => {
@@ -118,7 +102,7 @@ export function GoalDetailPage({
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search topic or notes..."
-            className="w-full pl-9 pr-4 py-2 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 text-xs sm:text-sm text-slate-800 dark:text-slate-200 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-500/40 transition-all shadow-sm"
+            className="w-full pl-9 pr-4 py-2 rounded-2xl spatial-glass bg-white/75 dark:bg-slate-900/70 border border-slate-200/80 dark:border-slate-800 text-xs sm:text-sm text-slate-800 dark:text-slate-200 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/40 focus:border-blue-500/50 transition-all shadow-sm"
           />
         </div>
 
@@ -180,7 +164,7 @@ export function GoalDetailPage({
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0 }}
-              className="p-8 text-center rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800"
+              className="p-8 text-center rounded-3xl spatial-glass bg-white/70 dark:bg-slate-900/70 border border-slate-200/80 dark:border-slate-800 shadow-spatial dark:shadow-spatial-dark"
             >
               <p className="text-sm font-semibold text-slate-600 dark:text-slate-400">
                 No milestone days match your current filter.
@@ -190,7 +174,7 @@ export function GoalDetailPage({
                   setFilter('all');
                   setSearchQuery('');
                 }}
-                className="mt-3 text-xs font-semibold text-brand-600 dark:text-brand-400 hover:underline"
+                className="mt-3 text-xs font-semibold text-blue-600 dark:text-sky-400 hover:underline"
               >
                 Reset filters & search
               </button>
@@ -199,29 +183,16 @@ export function GoalDetailPage({
         </AnimatePresence>
       </div>
 
-      {/* Add / Delete Day buttons for expanding / shrinking roadmap length */}
-      {filter === 'all' && !searchQuery.trim() && (
-        <div className="pt-2 pb-6 flex flex-wrap items-center justify-center gap-3">
-          {onAddDay && (
-            <button
-              onClick={onAddDay}
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-2xl bg-white dark:bg-[#0a0314] hover:bg-purple-50 dark:hover:bg-[#140726] border border-dashed border-slate-300 dark:border-purple-800/60 text-purple-700 dark:text-purple-300 text-xs sm:text-sm font-bold shadow-sm transition-all active:scale-95"
-            >
-              <Plus className="w-4 h-4" />
-              <span>Add Day {(goal.days?.length || 0) + 1}</span>
-            </button>
-          )}
-
-          {onDeleteDay && (goal.days?.length || 0) > 1 && (
-            <button
-              onClick={() => handleRequestDeleteDay(goal.days.length)}
-              className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-2xl bg-white dark:bg-[#0a0314] hover:bg-rose-50 dark:hover:bg-rose-950/30 border border-slate-200 dark:border-purple-800/40 text-slate-500 hover:text-rose-600 dark:hover:text-rose-400 text-xs sm:text-sm font-semibold shadow-sm transition-all active:scale-95"
-              title="Delete the last day if created by chance"
-            >
-              <Trash2 className="w-4 h-4" />
-              <span>Delete Last Day</span>
-            </button>
-          )}
+      {/* Add Day button for expanding roadmap length */}
+      {filter === 'all' && !searchQuery.trim() && onAddDay && (
+        <div className="pt-2 pb-6 flex items-center justify-center">
+          <button
+            onClick={onAddDay}
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-2xl spatial-glass bg-white/80 dark:bg-slate-900/75 hover:bg-blue-50/80 dark:hover:bg-blue-950/40 border border-dashed border-blue-300 dark:border-blue-700/60 text-blue-600 dark:text-sky-400 text-xs sm:text-sm font-bold shadow-sm transition-all active:scale-95 hover:shadow-md"
+          >
+            <Plus className="w-4 h-4" />
+            <span>Add Day {(goal.days?.length || 0) + 1}</span>
+          </button>
         </div>
       )}
 

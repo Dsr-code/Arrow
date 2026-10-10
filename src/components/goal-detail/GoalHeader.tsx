@@ -68,12 +68,12 @@ export function GoalHeader({
   };
 
   return (
-    <div className="mb-8 p-6 sm:p-8 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-soft dark:shadow-soft-dark">
+    <div className="mb-8 p-6 sm:p-8 rounded-3xl spatial-card bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border border-slate-200/80 dark:border-slate-800/80 shadow-spatial dark:shadow-spatial-dark">
       {/* Top row: Back button, Category, Delete action */}
       <div className="flex items-center justify-between flex-wrap gap-2 sm:gap-4 mb-6">
         <button
           onClick={onBack}
-          className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white bg-slate-100 dark:bg-[#140726] hover:bg-slate-200 dark:hover:bg-[#1f0a3b] border border-transparent dark:border-purple-900/40 transition-colors"
+          className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white bg-slate-100/90 dark:bg-slate-800/80 hover:bg-slate-200 dark:hover:bg-slate-700/80 border border-slate-200/50 dark:border-slate-700/50 transition-colors"
         >
           <ArrowLeft className="w-4 h-4" />
           <span>All Goals</span>
@@ -83,9 +83,9 @@ export function GoalHeader({
           {/* Remaining Days Badge */}
           <div
             title={goal.endDate ? `Target End Date: ${goal.endDate}` : undefined}
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 sm:py-2 rounded-xl text-xs font-bold text-purple-700 dark:text-purple-300 bg-purple-50 dark:bg-[#140726] border border-purple-200/80 dark:border-purple-800/60 shadow-sm"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 sm:py-2 rounded-xl text-xs font-bold text-blue-700 dark:text-sky-300 bg-blue-50/80 dark:bg-blue-950/40 border border-blue-200/80 dark:border-blue-800/60 shadow-sm"
           >
-            <Clock className="w-3.5 h-3.5 text-purple-500" />
+            <Clock className="w-3.5 h-3.5 text-blue-500 dark:text-sky-400" />
             <span>{Math.max(0, stats.totalDays - stats.completedDays)} {Math.max(0, stats.totalDays - stats.completedDays) === 1 ? 'Day' : 'Days'} Remaining</span>
           </div>
 
@@ -93,9 +93,9 @@ export function GoalHeader({
             <button
               onClick={onShareRequest}
               title="Share roadmap"
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 sm:py-2 rounded-xl text-xs font-semibold text-purple-700 dark:text-purple-300 hover:bg-purple-50 dark:hover:bg-[#140726] border border-purple-200/80 dark:border-purple-800/60 shadow-sm transition-colors"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 sm:py-2 rounded-xl text-xs font-semibold text-blue-700 dark:text-sky-300 bg-blue-50/60 dark:bg-blue-950/30 hover:bg-blue-100/80 dark:hover:bg-blue-900/50 border border-blue-200/80 dark:border-blue-800/60 shadow-sm transition-colors"
             >
-              <Share2 className="w-3.5 h-3.5" />
+              <Share2 className="w-3.5 h-3.5 text-blue-600 dark:text-sky-400" />
               <span className="hidden sm:inline">Share</span>
             </button>
           )}
@@ -123,7 +123,7 @@ export function GoalHeader({
                 onChange={(e) => setNameInput(e.target.value)}
                 onBlur={commitNameChange}
                 onKeyDown={handleKeyDown}
-                className="w-full px-3 py-1.5 text-xl sm:text-3xl font-extrabold rounded-xl bg-slate-50 dark:bg-[#140726] border-2 border-brand-500 text-slate-900 dark:text-white focus:outline-none"
+                className="w-full px-3 py-1.5 text-xl sm:text-3xl font-extrabold rounded-xl bg-slate-50 dark:bg-slate-800 border-2 border-blue-500 text-slate-900 dark:text-white focus:outline-none"
               />
               <button
                 onMouseDown={(e) => e.preventDefault()}
@@ -138,7 +138,7 @@ export function GoalHeader({
                   setIsEditingName(false);
                   setNameInput(goal.name);
                 }}
-                className="p-2 rounded-xl text-slate-400 hover:bg-slate-100 dark:hover:bg-purple-950/40"
+                className="p-2 rounded-xl text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800"
                 title="Cancel"
               >
                 <X className="w-5 h-5" />
@@ -153,7 +153,7 @@ export function GoalHeader({
               <h1 className="text-xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-tight break-words">
                 {goal.name}
               </h1>
-              <div className="p-1.5 rounded-lg text-slate-400 opacity-60 sm:opacity-0 group-hover/title:opacity-100 hover:text-brand-600 dark:hover:text-brand-400 transition-opacity shrink-0">
+              <div className="p-1.5 rounded-lg text-slate-400 opacity-60 sm:opacity-0 group-hover/title:opacity-100 hover:text-blue-600 dark:hover:text-sky-400 transition-opacity shrink-0">
                 <Edit2 className="w-4 h-4" />
               </div>
             </div>
@@ -181,13 +181,13 @@ export function GoalHeader({
           <span className="text-slate-700 dark:text-slate-300">
             Roadmap Progress
           </span>
-          <span className="text-brand-600 dark:text-brand-400">
+          <span className="text-blue-600 dark:text-sky-400 font-extrabold">
             {stats.completedDays} of {stats.totalDays} Days Completed ({stats.percentage}%)
           </span>
         </div>
 
         {/* Wide Linear Progress Bar */}
-        <div className="w-full h-3 rounded-full bg-slate-100 dark:bg-slate-800 overflow-hidden p-0.5">
+        <div className="w-full h-3 rounded-full bg-slate-100 dark:bg-slate-800/90 overflow-hidden p-0.5 border border-slate-200/60 dark:border-slate-750">
           <motion.div
             initial={{ width: 0 }}
             animate={{ width: `${stats.percentage}%` }}
@@ -195,14 +195,14 @@ export function GoalHeader({
             className={`h-full rounded-full ${
               stats.isCompleted
                 ? 'bg-gradient-to-r from-emerald-500 to-teal-400'
-                : 'bg-gradient-to-r from-brand-600 via-indigo-600 to-violet-500'
+                : 'bg-gradient-to-r from-blue-600 via-blue-500 to-sky-400'
             }`}
           />
         </div>
       </div>
 
       {/* Filter Chips Bar */}
-      <div className="mt-6 pt-5 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between flex-wrap gap-2">
+      <div className="mt-6 pt-5 border-t border-slate-100 dark:border-slate-800/80 flex items-center justify-between flex-wrap gap-2">
         <div className="flex items-center gap-1.5 flex-wrap">
           {(
             [
@@ -226,8 +226,8 @@ export function GoalHeader({
               onClick={() => onFilterChange(item.key)}
               className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition-all ${
                 filter === item.key
-                  ? 'bg-brand-600 text-white shadow-sm'
-                  : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700'
+                  ? 'bg-blue-600 text-white shadow-sm'
+                  : 'bg-slate-100/90 dark:bg-slate-800/90 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700/80'
               }`}
             >
               {item.label}
