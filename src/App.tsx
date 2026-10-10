@@ -9,6 +9,7 @@ import { CreateGoalModal } from './components/dashboard/CreateGoalModal';
 import { WelcomeScreen } from './components/welcome/WelcomeScreen';
 import { ShareModal } from './components/common/ShareModal';
 import { SharePreviewScreen } from './components/common/SharePreviewScreen';
+import { ArisChatModal } from './components/aris/ArisChatModal';
 import { decodeRoadmap, type SharedRoadmapPayload } from './utils/shareUtils';
 import { calculateGlobalStats } from './utils/streak';
 
@@ -65,10 +66,10 @@ function AppContent() {
     return null;
   });
 
-  // Goal ID being shared via modal (dynamically looked up to ensure freshest data)
   const [sharingGoalId, setSharingGoalId] = useState<string | null>(null);
 
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
+  const [isArisOpen, setIsArisOpen] = useState(false);
   const toast = useToast();
 
   // Keep URL hash synchronized for browser navigation & PWA window history
@@ -165,6 +166,8 @@ function AppContent() {
           onExport={exportGoals}
           onImport={importGoals}
           onImportSharedRoadmap={handleImportSharedRoadmap}
+          onToggleAris={() => setIsArisOpen((prev) => !prev)}
+          isArisOpen={isArisOpen}
         />
 
         <main className="flex-1">
@@ -241,6 +244,15 @@ function AppContent() {
         isOpen={Boolean(sharingGoalId && sharingGoal)}
         goal={sharingGoal}
         onClose={() => setSharingGoalId(null)}
+      />
+
+      {/* Aris AI Assistant Chat Modal */}
+      <ArisChatModal
+        isOpen={isArisOpen}
+        onClose={() => setIsArisOpen(false)}
+        userName={userName || 'Learner'}
+        goals={goals}
+        globalStreak={globalStats.highestStreak}
       />
       </div>
     </div>

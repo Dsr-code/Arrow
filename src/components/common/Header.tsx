@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Sun, Moon, Download, Upload, Monitor, User, Edit3, X, Check } from 'lucide-react';
+import { Sun, Moon, Download, Upload, Monitor, User, Edit3, X, Check, Bot } from 'lucide-react';
 import { useTheme } from '../../hooks/useTheme';
 import { usePWAInstall } from '../../hooks/usePWAInstall';
 import { InstallAppModal } from './InstallAppModal';
@@ -11,21 +11,24 @@ interface HeaderProps {
   userName?: string;
   onUpdateUserName?: (newName: string) => void;
   onNavigateHome: () => void;
-  globalStreak: number;
-  totalGoalsCount: number;
+  globalStreak?: number;
+  totalGoalsCount?: number;
   onExport: () => void;
   onImport: (json: string) => boolean;
   onImportSharedRoadmap?: (payload: SharedRoadmapPayload) => void;
+  onToggleAris?: () => void;
+  isArisOpen?: boolean;
 }
 
 export function Header({
   userName,
   onUpdateUserName,
   onNavigateHome,
-  globalStreak,
   onExport,
   onImport,
   onImportSharedRoadmap,
+  onToggleAris,
+  isArisOpen,
 }: HeaderProps) {
   const { resolvedTheme, toggleTheme } = useTheme();
   const { isInstallable, isStandalone, triggerInstall } = usePWAInstall();
@@ -105,15 +108,19 @@ export function Header({
 
           {/* Right Action Tools */}
           <div className="flex items-center gap-1.5 sm:gap-2.5">
-            {/* Global Streak Indicator */}
-            {globalStreak > 0 && (
-              <div
-                title="Your highest active streak across goals"
-                className="flex items-center gap-1 px-3 py-1.5 rounded-full bg-gradient-to-r from-amber-50 to-orange-50 dark:from-amber-950/40 dark:to-orange-950/40 border border-amber-200/80 dark:border-amber-800/50 text-amber-700 dark:text-amber-300 text-xs font-black shadow-sm shrink-0"
-              >
-                <span>🔥 {globalStreak}</span>
-              </div>
-            )}
+            {/* Aris AI Assistant Bot Button */}
+            <button
+              onClick={onToggleAris}
+              title="Ask Aris (AI Assistant)"
+              className={`p-2 sm:p-2.5 rounded-2xl text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 bg-slate-100/80 dark:bg-slate-800/70 hover:bg-white dark:hover:bg-slate-800 border border-slate-200/80 dark:border-slate-700/60 hover:border-blue-300 dark:hover:border-blue-500/50 shadow-sm transition-all ${
+                isArisOpen
+                  ? 'ring-2 ring-blue-500/50 text-blue-600 dark:text-sky-400 bg-white dark:bg-slate-800 shadow-blue-500/10'
+                  : ''
+              }`}
+              aria-label="Open Aris AI Assistant"
+            >
+              <Bot className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-blue-600 dark:text-sky-400" />
+            </button>
 
             {/* Install Desktop App Button */}
             {!isStandalone && (
