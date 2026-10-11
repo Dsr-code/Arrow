@@ -16,6 +16,7 @@ interface DashboardPageProps {
   onOpenCreateModal: () => void;
   onDeleteGoal: (goalId: string) => void;
   onShareGoal?: (goal: Goal) => void;
+  onOpenStats?: () => void;
 }
 
 export function DashboardPage({
@@ -25,6 +26,7 @@ export function DashboardPage({
   onOpenCreateModal,
   onDeleteGoal,
   onShareGoal,
+  onOpenStats,
 }: DashboardPageProps) {
   const [searchQuery, setSearchQuery] = useState('');
   const [filter, setFilter] = useState<'all' | 'active' | 'completed'>('all');
@@ -77,7 +79,13 @@ export function DashboardPage({
       </div>
 
       {/* Global Overview Metrics */}
-      {goals.length > 0 && <GoalStatsBar stats={globalStats} />}
+      {goals.length > 0 && (
+        <GoalStatsBar
+          stats={globalStats}
+          goals={goals}
+          onOpenStats={onOpenStats}
+        />
+      )}
 
       {/* Controls Bar: Search & Filter Tabs */}
       {goals.length > 0 && (

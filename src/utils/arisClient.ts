@@ -6,6 +6,11 @@ import {
   DEFAULT_ARIS_SETTINGS,
   PROVIDER_PRESETS,
 } from '../types/aris';
+import {
+  getStudyLog,
+  extractCompletionsFromGoals,
+  getArisStatsSummary,
+} from './studyStats';
 
 const SETTINGS_KEY = 'arrow_aris_settings';
 const CHAT_KEY = 'arrow_aris_chat';
@@ -74,7 +79,8 @@ export function clearArisChatHistory(): void {
 export function buildLiveAppContext(
   userName: string,
   goals: Goal[],
-  globalStreak: number
+  globalStreak: number,
+  pomodorosToday = 0
 ): string {
   const compactGoals = (goals || []).map((goal) => {
     const stats = calculateGoalStats(goal);
@@ -166,9 +172,15 @@ export function buildLiveAppContext(
     };
   });
 
+  const studyLog = getStudyLog();
+  const completions = extractCompletionsFromGoals(goals);
+  const studyStats = getArisStatsSummary(studyLog, completions);
+
   const payload = {
     userName,
     globalStreak,
+    pomodorosToday: studyStats.pomodorosToday || pomodorosToday,
+    stats: studyStats,
     activeGoalsCount: compactGoals.length,
     goals: compactGoals,
   };

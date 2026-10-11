@@ -10,12 +10,17 @@ import { WelcomeScreen } from './components/welcome/WelcomeScreen';
 import { ShareModal } from './components/common/ShareModal';
 import { SharePreviewScreen } from './components/common/SharePreviewScreen';
 import { ArisChatModal } from './components/aris/ArisChatModal';
+import { PomodoroModal } from './components/pomodoro/PomodoroModal';
+import { StatsModal } from './components/stats/StatsModal';
+import { PomodoroProvider, usePomodoro } from './context/PomodoroContext';
 import { decodeRoadmap, type SharedRoadmapPayload } from './utils/shareUtils';
 import { calculateGlobalStats } from './utils/streak';
 
 const USER_NAME_KEY = 'arrow_user_name';
 
 function AppContent() {
+  const { pomodorosToday } = usePomodoro();
+  const [isStatsOpen, setIsStatsOpen] = useState(false);
   const {
     goals,
     getGoalById,
@@ -226,6 +231,7 @@ function AppContent() {
             onOpenCreateModal={() => setIsCreateModalOpen(true)}
             onDeleteGoal={(id) => deleteGoal(id)}
             onShareGoal={(goal) => setSharingGoalId(goal.id)}
+            onOpenStats={() => setIsStatsOpen(true)}
           />
         )}
       </main>
@@ -253,6 +259,17 @@ function AppContent() {
         userName={userName || 'Learner'}
         goals={goals}
         globalStreak={globalStats.highestStreak}
+        pomodorosToday={pomodorosToday}
+      />
+
+      {/* Pomodoro Timer Modal */}
+      <PomodoroModal />
+
+      {/* Overall Statistics Modal */}
+      <StatsModal
+        isOpen={isStatsOpen}
+        onClose={() => setIsStatsOpen(false)}
+        goals={goals}
       />
       </div>
     </div>
@@ -262,7 +279,9 @@ function AppContent() {
 export default function App() {
   return (
     <ToastProvider>
-      <AppContent />
+      <PomodoroProvider>
+        <AppContent />
+      </PomodoroProvider>
     </ToastProvider>
   );
 }

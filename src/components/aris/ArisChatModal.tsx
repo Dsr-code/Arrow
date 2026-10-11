@@ -36,6 +36,7 @@ interface ArisChatModalProps {
   userName?: string;
   goals: Goal[];
   globalStreak: number;
+  pomodorosToday?: number;
 }
 
 export function ArisChatModal({
@@ -44,6 +45,7 @@ export function ArisChatModal({
   userName = 'Learner',
   goals,
   globalStreak,
+  pomodorosToday = 0,
 }: ArisChatModalProps) {
   const [currentView, setCurrentView] = useState<'chat' | 'settings'>('chat');
   const [settings, setSettings] = useState<ArisSettings>(() => getArisSettings());
@@ -147,7 +149,12 @@ export function ArisChatModal({
     setIsStreaming(true);
 
     // 3. Build live context from live app data (never saved in history)
-    const liveContextJson = buildLiveAppContext(userName, goals, globalStreak);
+    const liveContextJson = buildLiveAppContext(
+      userName,
+      goals,
+      globalStreak,
+      pomodorosToday
+    );
     const systemPrompt = buildSystemPrompt(liveContextJson);
 
     // 4. Create AbortController

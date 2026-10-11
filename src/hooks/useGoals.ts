@@ -4,6 +4,7 @@ import type { Goal, Day, Resource, DayLog } from '../types/goal';
 import { detectLinkType } from '../utils/linkDetector';
 import { fireConfetti } from '../utils/soundEffects';
 import { type SharedRoadmapPayload, createGoalFromSharedPayload } from '../utils/shareUtils';
+import { getStudyLog, saveStudyLog, extractCompletionsFromGoals } from '../utils/studyStats';
 
 const STORAGE_KEY = 'arrow_goals_v1';
 
@@ -187,6 +188,9 @@ export function useGoals() {
   const deleteGoal = useCallback(
     (goalId: string) => {
       setGoals((prev) => prev.filter((g) => g.id !== goalId));
+      if (typeof window !== 'undefined') {
+        window.dispatchEvent(new CustomEvent('arrow_stats_updated'));
+      }
     },
     [setGoals]
   );
@@ -224,6 +228,10 @@ export function useGoals() {
           return { ...goal, days: updatedDays };
         })
       );
+
+      if (typeof window !== 'undefined') {
+        window.dispatchEvent(new CustomEvent('arrow_stats_updated'));
+      }
 
       if (isNewlyCompleted) {
         fireConfetti(allDaysCompletedNow);
@@ -411,24 +419,61 @@ export function useGoals() {
     [setGoals]
   );
 
-  // Export Goals as JSON
+  // Export Goals and Study History as JSON Backup (v2)
   const exportGoals = useCallback(() => {
-    const dataStr = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(cleanGoals, null, 2));
+    const backupPayload = {
+      version: 2,
+      exportDate: new Date().toISOString(),
+      goals: cleanGoals,
+      studyLog: getStudyLog(),
+      completionLog: extractCompletionsFromGoals(cleanGoals).dated,
+    };
+
+    const dataStr =
+      'data:text/json;charset=utf-8,' +
+      encodeURIComponent(JSON.stringify(backupPayload, null, 2));
     const downloadAnchor = document.createElement('a');
     downloadAnchor.setAttribute('href', dataStr);
-    downloadAnchor.setAttribute('download', `arrow-goals-backup-${new Date().toISOString().split('T')[0]}.json`);
+    downloadAnchor.setAttribute(
+      'download',
+      `arrow-goals-backup-${new Date().toISOString().split('T')[0]}.json`
+    );
     document.body.appendChild(downloadAnchor);
     downloadAnchor.click();
     downloadAnchor.remove();
   }, [cleanGoals]);
 
-  // Import Goals JSON
+  // Import Goals JSON (tolerant of legacy Goal[] and v2 backup payload)
   const importGoals = useCallback(
     (jsonString: string): boolean => {
       try {
         const parsed = JSON.parse(jsonString);
-        if (Array.isArray(parsed) && parsed.length > 0 && parsed[0].id && parsed[0].days) {
+
+        // Format 1: Legacy backup (just an array of Goal[])
+        if (
+          Array.isArray(parsed) &&
+          parsed.length > 0 &&
+          parsed[0].id &&
+          parsed[0].days
+        ) {
           setGoals(sanitizeGoals(parsed));
+          if (typeof window !== 'undefined') {
+            window.dispatchEvent(new CustomEvent('arrow_stats_updated'));
+          }
+          return true;
+        }
+
+        // Format 2: V2 Backup with studyLog and completionLog
+        if (parsed && typeof parsed === 'object') {
+          if (Array.isArray(parsed.goals)) {
+            setGoals(sanitizeGoals(parsed.goals));
+          }
+          if (parsed.studyLog && typeof parsed.studyLog === 'object') {
+            saveStudyLog(parsed.studyLog);
+          }
+          if (typeof window !== 'undefined') {
+            window.dispatchEvent(new CustomEvent('arrow_stats_updated'));
+          }
           return true;
         }
       } catch (err) {
